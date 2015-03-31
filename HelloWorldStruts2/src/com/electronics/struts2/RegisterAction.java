@@ -1,4 +1,4 @@
-package com.tutorialspoint.struts2;
+package com.electronics.struts2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LoginAction extends ActionSupport {
+public class RegisterAction extends ActionSupport {
 
    private String user;
    private String password;
@@ -21,18 +21,21 @@ public class LoginAction extends ActionSupport {
          String URL = "jdbc:mysql://localhost/struts_tutorial";
          Class.forName("com.mysql.jdbc.Driver");
          conn = DriverManager.getConnection(URL, "root", "root");
-         String sql = "SELECT name FROM login WHERE";
-         sql+=" user = ? AND password = ?";
+         String sql = "Insert into login (name, user, password) values (?,?,?)";
+         
          PreparedStatement ps = conn.prepareStatement(sql);
-         ps.setString(1, user);
-         ps.setString(2, password);
-         ResultSet rs = ps.executeQuery();
+         ps.setString(1, name);
+         ps.setString(2, user);
+         ps.setString(3, password);
+         ps.executeUpdate();
 
-         while (rs.next()) {
-            name = rs.getString(1);
+        
+           
             ret = SUCCESS;
-         }
+        
       } catch (Exception e) {
+    	System.out.println(e);
+    	password = e.getMessage();
          ret = ERROR;
       } finally {
          if (conn != null) {
