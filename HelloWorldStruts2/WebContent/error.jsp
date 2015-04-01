@@ -5,6 +5,6 @@
 <title>Invalid User Name or Password</title>
 </head>
 <body>
-   Wrong user name or password provided.  <s:property value="password"/>
+   Invalid details.  <s:property value="title"/>
 </body>
 </html>

@@ -10,14 +10,21 @@
       <action name="loginaction" 
          class="com.electronics.struts2.LoginAction"
          method="execute">
-         <result name="success">/success.jsp</result>
+         <result name="success">/home.jsp</result>
          <result name="error">/error.jsp</result>
       </action>
       
       <action name="registeraction" 
          class="com.electronics.struts2.RegisterAction"
          method="execute">
-         <result name="success">/success.jsp</result>
+         <result name="success">/home.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="newitemaction" 
+         class="com.electronics.struts2.NewItemAction"
+         method="execute">
+         <result name="success">/home.jsp</result>
          <result name="error">/error.jsp</result>
       </action>
    
