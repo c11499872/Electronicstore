@@ -1,9 +1,14 @@
 package com.electronics.struts2;
 
+import java.util.ArrayList;
+
 public class Item {
 
 	  
 	private String title, manufacturer, price, category;
+	
+
+	
 
 	public String getTitle() {
 		return title;

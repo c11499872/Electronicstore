@@ -5,6 +5,7 @@
 <title>Successful Login</title>
 </head>
 <body>
-   Hello World, <s:property value="password"/>
+   Hello World, <s:property value="title"/>
+   <a href="home.jsp">home</a>
 </body>
 </html>

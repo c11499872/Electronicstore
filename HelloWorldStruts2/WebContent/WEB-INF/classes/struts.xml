@@ -27,6 +27,41 @@
          <result name="success">/home.jsp</result>
          <result name="error">/error.jsp</result>
       </action>
+      
+      <action name="deleteitem" 
+         class="com.electronics.struts2.DeleteItem"
+         method="execute">
+         <result name="success">/home.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+      <action name="addtocart" 
+         class="com.electronics.struts2.AddToCart"
+         method="execute">
+         <result name="success">/cart.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="clearcart" 
+         class="com.electronics.struts2.AddToCart"
+         method="clearcart">
+         <result name="success">/home.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="viewcart" 
+         class="com.electronics.struts2.AddToCart"
+         method="viewcart">
+         <result name="success">/cart.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="deletecartitem" 
+         class="com.electronics.struts2.AddToCart"
+         method="deleteitem">
+         <result name="success">/cart.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
    
    </package>
 

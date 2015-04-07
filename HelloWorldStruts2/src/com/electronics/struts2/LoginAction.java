@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Map;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
@@ -13,71 +15,21 @@ public class LoginAction extends ActionSupport {
    private String user;
    private String password;
    private String name;
+   ItemOperations io = new ItemOperations();
    
-   ArrayList<Item> list=new ArrayList<Item>(); 
+   public ArrayList<Item> itemList=new ArrayList<Item>(); 
 
-   public String execute() {
-      String ret = ERROR;
-      Connection conn = null;
+   
 
-      try {
-         String URL = "jdbc:mysql://localhost/struts_tutorial";
-         Class.forName("com.mysql.jdbc.Driver");
-         conn = DriverManager.getConnection(URL, "root", "root");
-         String sql = "SELECT name FROM customer WHERE";
-         sql+=" user_name = ? AND password = ?";
-         PreparedStatement ps = conn.prepareStatement(sql);
-         ps.setString(1, user);
-         ps.setString(2, password);
-         ResultSet rs = ps.executeQuery();
-
-         while (rs.next()) {
-            name = rs.getString(1);
+public String execute() {
+    
+	   	Map session = ActionContext.getContext().getSession();
+	   	session.put("context", user);
+	   	
+	   	itemList = io.getAllFromItem();
             
-            try{  
-            	 
-            	              
-            	  PreparedStatement ps2=conn.prepareStatement("select * from item");  
-            	  ResultSet rs2=ps2.executeQuery();  
-            	  
-            	  while(rs2.next()){  
-            	   Item item=new Item();  
-            	   item.setTitle(rs2.getString(2));  
-            	   item.setManufacturer(rs2.getString(3));  
-            	   item.setPrice(rs2.getString(4));  
-            	   item.setCategory(rs2.getString(5));  
-            	   list.add(item);  
-            	  }  
-            	  
-            	  //conn.close();  
-            	 }catch(Exception e){
-            		 e.printStackTrace();
-            		 }  
-            	          
-            
-            ret = SUCCESS;
-         }
-         if(ret == ERROR)
-         {
-        	 password = "username and password do not match";
-         }
-         
-         
-         
-         
-      } catch (Exception e) {
-    	  
-         ret = ERROR;
+	   	return SUCCESS;
         
-      } finally {
-         if (conn != null) {
-            try {
-               conn.close();
-            } catch (Exception e) {
-            }
-         }
-      }
-      return ret;
    }
 
    public String getUser() {
@@ -104,10 +56,12 @@ public class LoginAction extends ActionSupport {
       this.name = name;
    }
    
-   public ArrayList<Item> getList() {  
-	    return list;  
-	}  
-	public void setList(ArrayList<Item> list) {  
-	    this.list = list;  
-	}  
+   public ArrayList<Item> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(ArrayList<Item> itemList) {
+		this.itemList = itemList;
+	}
+   
 }
