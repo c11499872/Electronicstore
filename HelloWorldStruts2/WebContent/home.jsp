@@ -11,18 +11,23 @@
   All Items: <br/> 
 
 	<display:table name="itemList" pagesize="5" requestURI="" sort = "list" style="margin-left:300px;">
-		<display:column property="title" title="Title" sortable="true" style="width:100px;"/>
+		<display:column property="title" title="Title" href="viewitem.action" paramId="title" sortable="true" style="width:100px;"/>
 		<display:column property="manufacturer" title="Manufacturer" sortable="true" style="width:100px;"/>
 		<display:column property="price" title="Price" sortable="true" style="width:100px;"/>
 		<display:column property="category" title="Category" sortable="true" style="width:100px;"/>
+		<s:if test="#session.context=='admin'">
 	    <display:column media="html" property="title" title="Delete item" href="deleteitem.action" paramId="title" style="width:100px;"/>
-	    <display:column property="title" title="Add to cart" href="addtocart.action" paramId="title" style="width:100px;"/>
+	</s:if>
 	</display:table>
  
 
 <br/>
-<a href="newItem.jsp">Add item</a>
+<s:if test="#session.context=='admin'">
+			<a href="newItem.jsp">Add item</a>
+		</s:if>
+
 <a href="viewcart.action">View Cart</a>
+<a href="vieworders.action">My Orders</a>
 
 </body>
 </html>

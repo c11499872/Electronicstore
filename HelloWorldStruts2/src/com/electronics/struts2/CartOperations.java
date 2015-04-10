@@ -12,6 +12,7 @@ public class CartOperations {
 	static ArrayList<Item> cartList=new ArrayList<Item>(); 
 	
 	ItemOperations io = new ItemOperations();
+	static ArrayList<Item> orderList=new ArrayList<Item>(); 
 	
 	Connection conn = null;
 	
@@ -132,6 +133,35 @@ public class CartOperations {
 	         return false;
 	        
 	      } 
+		
+	}
+	
+	public String checkout()
+	{
+		String username = "test";
+		orderList = getItemFromCart(username);
+		
+		PreparedStatement ps;
+	
+		try {
+			  	String sql = "Insert into orders (user, item) values (?,?)";
+			  	for(int i = 0; i<orderList.size()+1; i++){
+			  		Item item = orderList.get(i);
+			  		ps = conn.prepareStatement(sql);
+			        ps.setString(1, username);
+			        ps.setInt(2, io.getIdFromTitle(item.getTitle()));
+			        ps.executeUpdate();
+			  		
+			  		
+			  	}
+			  	return "SUCCESS"; 
+		      
+			} 
+		catch (SQLException e) {
+			
+			e.printStackTrace();
+			return "ERROR";
+			}  
 		
 	}
 	

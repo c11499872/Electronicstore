@@ -14,7 +14,8 @@ public class AddToCart extends ActionSupport{
 
 	private String title;
 	private double price;
-	
+	private String quantity;
+
 	Map session = ActionContext.getContext().getSession();
 	CartOperations co = new CartOperations();
 	ItemOperations io = new ItemOperations();
@@ -25,11 +26,13 @@ public class AddToCart extends ActionSupport{
 
 	public String execute() {
 	     
+		  title = session.get("title").toString();
+		  int quant = Integer.parseInt(quantity);
 	      co.addToCart(session.get("context").toString(), title);
 	      cartList = co.getItemFromCart(session.get("context").toString());
 	  	  price = co.getTotal(session.get("context").toString());
 	   	  session.put("price", price);
-	   	
+	   	  session.put("quantity", quant);
 	      return SUCCESS;
 	      
 	   }
@@ -66,6 +69,15 @@ public class AddToCart extends ActionSupport{
 		
 	}
 	
+
+	public String checkout()
+	{
+		co.checkout();
+			
+			return SUCCESS;
+		
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -80,6 +92,15 @@ public class AddToCart extends ActionSupport{
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 	
 	public  ArrayList<Item> getCartList() {  

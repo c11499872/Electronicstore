@@ -16,8 +16,8 @@
 		</display:table>
 		
 		Total: <s:property value="#session.price" />
-		
+		<br />
 		<a href="clearcart.action">Clear Cart</a>
-	
+		<a href="checkout.action">Check out</a>
 </body>
 </html>

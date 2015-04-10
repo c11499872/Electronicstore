@@ -19,7 +19,7 @@ public class NewItemAction extends ActionSupport {
    private String category;
   // private File image;
   // String password;
-   ArrayList<Item> list=new ArrayList<Item>(); 
+   ArrayList<Item> itemList=new ArrayList<Item>(); 
 
    public String execute() {
       String ret = ERROR;
@@ -54,7 +54,7 @@ public class NewItemAction extends ActionSupport {
           	   item.setManufacturer(rs3.getString(3));  
           	   item.setPrice(rs3.getString(4));  
           	   item.setCategory(rs3.getString(5));  
-          	   list.add(item);  
+          	   itemList.add(item);  
           	  }  
           	  
           	  //conn.close();  
@@ -112,11 +112,11 @@ public class NewItemAction extends ActionSupport {
 		this.category = category;
 	}
 
-	public ArrayList<Item> getList() {  
-	    return list;  
+	public ArrayList<Item> getItemList() {  
+	    return itemList;  
 	}  
-	public void setList(ArrayList<Item> list) {  
-	    this.list = list;  
+	public void setList(ArrayList<Item> itemList) {  
+	    this.itemList = itemList;  
 	}  
 
 

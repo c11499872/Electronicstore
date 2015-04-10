@@ -21,6 +21,13 @@
          <result name="error">/error.jsp</result>
       </action>
       
+        <action name="viewitem" 
+         class="com.electronics.struts2.ItemOperations"
+         method="viewItem">
+         <result name="success">/item.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
        <action name="newitemaction" 
          class="com.electronics.struts2.NewItemAction"
          method="execute">
@@ -32,6 +39,13 @@
          class="com.electronics.struts2.DeleteItem"
          method="execute">
          <result name="success">/home.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="reviewitem" 
+         class="com.electronics.struts2.ItemOperations"
+         method="viewItem">
+         <result name="success">/item.jsp</result>
          <result name="error">/error.jsp</result>
       </action>
       
@@ -62,6 +76,28 @@
          <result name="success">/cart.jsp</result>
          <result name="error">/error.jsp</result>
       </action>
+      
+       <action name="checkout" 
+         class="com.electronics.struts2.OrderOperations"
+         method="checkout">
+         <result name="success">/home.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="vieworders" 
+         class="com.electronics.struts2.OrderOperations"
+         method="vieworders">
+         <result name="success">/orders.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
+       <action name="addReview" 
+         class="com.electronics.struts2.ReviewOperations"
+         method="addreview">
+         <result name="success">/home.jsp</result>
+         <result name="error">/error.jsp</result>
+      </action>
+      
    
    </package>
 
