@@ -5,6 +5,6 @@
 <title>Invalid User Name or Password</title>
 </head>
 <body>
-   Invalid details.  <s:property value="title"/>
+   Invalid details.  <s:property value="#session.error" />
 </body>
 </html>

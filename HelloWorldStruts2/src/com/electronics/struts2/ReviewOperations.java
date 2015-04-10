@@ -8,10 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
-public class ReviewOperations extends ActionSupport{
+public class ReviewOperations{
 
 	String review, username, title;
 	int rating;
@@ -24,7 +21,7 @@ public class ReviewOperations extends ActionSupport{
 	
 	CartOperations co = new CartOperations();
 	ItemOperations io = new ItemOperations();
-	Map session = ActionContext.getContext().getSession();
+	private Map<String, Object> session = SessionFactory.getSessionInstance();
 	
 	Connection conn = null;
 	
@@ -59,13 +56,13 @@ public class ReviewOperations extends ActionSupport{
 			        ps.setInt(4, rating);
 			        ps.executeUpdate();
 			  		
-			  	return SUCCESS; 
+			  	return "SUCCESS"; 
 		      
 			} 
 		catch (SQLException e) {
 			
 			e.printStackTrace();
-			return ERROR;
+			return "ERROR";
 			}  
 		
 	}

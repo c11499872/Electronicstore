@@ -8,14 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
-public class ItemOperations extends ActionSupport {
+public class ItemOperations{
 
 	String title, item;
 	String price, manufacturer, category;
-
+	private Map<String, Object> session = SessionFactory.getSessionInstance();
 	static ArrayList<Item> list=new ArrayList<Item>(); 
 	static ArrayList<Item> items=new ArrayList<Item>(); 
 	static ArrayList<Review> reviews=new ArrayList<Review>(); 
@@ -57,14 +54,13 @@ public class ItemOperations extends ActionSupport {
 				setPrice(rs.getString(4));  
 				setCategory(rs.getString(5));  
 				
-				Map session = ActionContext.getContext().getSession();
 			   	session.put("title", title);
 				} 
 			catch (SQLException e) {
 				e.printStackTrace();
 				}  
 			
-		return SUCCESS;
+		return "SUCCESS";
 	}
 	
 	
@@ -302,6 +298,8 @@ public String getPriceFromId(int id){
 	public static void setTest(ArrayList<Review> test) {
 		ItemOperations.test = test;
 	}
+
+	
 
 	
 	

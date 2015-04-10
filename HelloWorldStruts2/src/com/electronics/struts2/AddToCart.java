@@ -1,22 +1,15 @@
 package com.electronics.struts2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
-public class AddToCart extends ActionSupport{
-
+public class AddToCart{
+	
 	private String title;
 	private double price;
 	private String quantity;
 
-	Map session = ActionContext.getContext().getSession();
+	private Map<String, Object> session = SessionFactory.getSessionInstance();
 	CartOperations co = new CartOperations();
 	ItemOperations io = new ItemOperations();
 	 
@@ -33,7 +26,7 @@ public class AddToCart extends ActionSupport{
 	  	  price = co.getTotal(session.get("context").toString());
 	   	  session.put("price", price);
 	   	  session.put("quantity", quant);
-	      return SUCCESS;
+	      return "SUCCESS";
 	      
 	   }
 	
@@ -43,11 +36,11 @@ public class AddToCart extends ActionSupport{
 		 price = 0.0;
 		if(co.clearcart(session.get("context").toString()))
 			{
-			return SUCCESS;
+			return "SUCCESS";
 			}
 		else
 		{
-			return ERROR;
+			return "ERROR";
 		}
 		
 		
@@ -57,7 +50,7 @@ public class AddToCart extends ActionSupport{
 	{
 		cartList = co.getItemFromCart(session.get("context").toString());
 			
-			return SUCCESS;
+			return "SUCCESS";
 		
 	}
 	
@@ -65,7 +58,7 @@ public class AddToCart extends ActionSupport{
 	{
 		co.deleteItemFromCart(title);
 			
-			return SUCCESS;
+			return "SUCCESS";
 		
 	}
 	
@@ -74,7 +67,7 @@ public class AddToCart extends ActionSupport{
 	{
 		co.checkout();
 			
-			return SUCCESS;
+			return "SUCCESS";
 		
 	}
 	

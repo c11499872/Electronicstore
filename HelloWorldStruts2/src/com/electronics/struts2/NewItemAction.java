@@ -1,17 +1,12 @@
 package com.electronics.struts2;
 
-import java.awt.Image;
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.opensymphony.xwork2.ActionSupport;
-
-public class NewItemAction extends ActionSupport {
+public class NewItemAction{
 
    private String title;
    private String manufacturer;
@@ -22,24 +17,21 @@ public class NewItemAction extends ActionSupport {
    ArrayList<Item> itemList=new ArrayList<Item>(); 
 
    public String execute() {
-      String ret = ERROR;
+      String ret = "ERROR";
       Connection conn = null;
 
       try {
-    	 FileInputStream fis = null;
+    	 
          String URL = "jdbc:mysql://localhost/struts_tutorial";
          Class.forName("com.mysql.jdbc.Driver");
          conn = DriverManager.getConnection(URL, "root", "root");
          String sql = "insert into item (title, manufacturer, price, category) values (?, ?, ?, ?)";
-        
-         //fis = new FileInputStream(image);
         
          PreparedStatement ps = conn.prepareStatement(sql);
          ps.setString(1, title);
          ps.setString(2, manufacturer);
          ps.setString(3, price);
          ps.setString(4, category);
-         //ps.setBlob(5, fis, (int) image.length());
          ps.executeUpdate();
          
          try{  
@@ -62,11 +54,11 @@ public class NewItemAction extends ActionSupport {
           		 e.printStackTrace();
           		 }
          
-         ret = SUCCESS;
+         ret = "SUCCESS";
 
       } catch (Exception e) {
     	  title = e.getMessage();
-         ret = ERROR;
+         ret = "ERROR";
          
       } finally {
          if (conn != null) {

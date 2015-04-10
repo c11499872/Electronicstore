@@ -7,6 +7,19 @@
    <constant name="struts.devMode" value="true" />
    <package name="helloworld" extends="struts-default">
    
+   <!-- Custom authentication interceptor is used to prevent users that are not logged in from performing actions -->
+        <interceptors>
+		    <interceptor name="customerAuth" class="com.electronics.struts2.LoginInterceptor"></interceptor>
+		    <interceptor-stack name="customerStack">
+		        <interceptor-ref name="customerAuth"></interceptor-ref>
+		        <interceptor-ref name="defaultStack"></interceptor-ref>
+		    </interceptor-stack>
+		</interceptors>
+		
+        <global-results>
+            <result name="loginaction" type="redirect">index.jsp</result>
+        </global-results>
+        
       <action name="loginaction" 
          class="com.electronics.struts2.LoginAction"
          method="execute">
@@ -17,7 +30,7 @@
       <action name="registeraction" 
          class="com.electronics.struts2.RegisterAction"
          method="execute">
-         <result name="success">/home.jsp</result>
+         <result name="success">/index.jsp</result>
          <result name="error">/error.jsp</result>
       </action>
       

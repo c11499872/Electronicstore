@@ -8,10 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
-public class OrderOperations extends ActionSupport{
+public class OrderOperations{
 
 	String title, username;
 	static ArrayList<Item> orderList=new ArrayList<Item>(); 
@@ -20,7 +17,7 @@ public class OrderOperations extends ActionSupport{
 	
 	CartOperations co = new CartOperations();
 	ItemOperations io = new ItemOperations();
-	Map session = ActionContext.getContext().getSession();
+	private Map<String, Object> session = SessionFactory.getSessionInstance();
 	
 	Connection conn = null;
 	
@@ -60,7 +57,7 @@ public class OrderOperations extends ActionSupport{
 				e.printStackTrace();
 				}  
 			
-		return SUCCESS;
+		return "SUCCESS";
 	}
 	
 	public String checkout()
@@ -81,13 +78,13 @@ public class OrderOperations extends ActionSupport{
 			  		
 			  	}
 			  	co.clearcart(username);
-			  	return SUCCESS; 
+			  	return "SUCCESS"; 
 		      
 			} 
 		catch (SQLException e) {
 			
 			e.printStackTrace();
-			return ERROR;
+			return "ERROR";
 			}  
 		
 	}

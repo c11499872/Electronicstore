@@ -1,35 +1,32 @@
 package com.electronics.struts2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-
-public class LoginAction extends ActionSupport {
+public class LoginAction{
 
    private String user;
    private String password;
    private String name;
+   UserOperations uo = new UserOperations();
    ItemOperations io = new ItemOperations();
-   
+   private Map<String, Object> session = SessionFactory.getSessionInstance();
    public ArrayList<Item> itemList=new ArrayList<Item>(); 
 
    
 
 public String execute() {
     
-	   	Map session = ActionContext.getContext().getSession();
+	
 	   	session.put("context", user);
+	   	if(uo.validLogin(user, password)){
 	   	
 	   	itemList = io.getAllFromItem();
             
-	   	return SUCCESS;
-        
+	   	return "success";
+	   	}
+	   	else
+	   		return "error";
    }
 
    public String getUser() {

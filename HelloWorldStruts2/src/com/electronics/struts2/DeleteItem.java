@@ -3,18 +3,15 @@ package com.electronics.struts2;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.opensymphony.xwork2.ActionSupport;
-
-public class DeleteItem extends ActionSupport{
+public class DeleteItem{
 
 	private String title;
 	ArrayList<Item> list=new ArrayList<Item>();
 	
 	 public String execute() {
-	      String ret = ERROR;
+	      String ret = "ERROR";
 	      Connection conn = null;
 
 	      try {
@@ -27,14 +24,13 @@ public class DeleteItem extends ActionSupport{
 	         ps.setString(1, title);
 	
 	         ps.executeUpdate();
-	         LoginAction la = new LoginAction();
-        	
-	         ret = SUCCESS;
+	     
+	         ret = "SUCCESS";
 	   
 	      
 	      } catch (Exception e) {
 	    	  title = e.getMessage();
-	         ret = ERROR;
+	         ret = "ERROR";
 	        
 	      } finally {
 	         if (conn != null) {
